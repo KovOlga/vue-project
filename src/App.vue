@@ -1,85 +1,110 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+// import { RouterLink, RouterView } from 'vue-router'
+// import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+const posts = ref([
+  {
+    id: 1,
+    title: 'JS1',
+    body: 'Description'
+  },
+  {
+    id: 2,
+    title: 'JS2',
+    body: 'Description'
+  },
+  {
+    id: 3,
+    title: 'JS3',
+    body: 'Description'
+  },
+  {
+    id: 4,
+    title: 'JS4',
+    body: 'Description'
+  }
+])
+const title = ref('')
+const body = ref('')
+
+const createPost = () => {
+  const newPost = {
+    id: Date.now(),
+    title: title.value,
+    body: body.value
+  }
+  console.log('dd', newPost)
+  posts.value.push(newPost)
+  console.log('posts', posts)
+  title.value = ''
+  body.value = ''
+}
+
+console.log('cdfcvd', posts.value)
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <div class="app">
+    <form class="form" @submit.prevent>
+      <h4>Create a post</h4>
+      <input
+        v-bind:value="title"
+        @input="title = $event.target.value"
+        class="input"
+        type="text"
+        placeholder="Title"
+      />
+      <input
+        v-bind:value="body"
+        @input="body = $event.target.value"
+        class="input"
+        type="text"
+        placeholder="Body"
+      />
+      <button class="button" @click="createPost">Create</button>
+    </form>
+    <div class="post" v-for="post in posts" v-bind:key="post.id">
+      <div><strong>Название: </strong>{{ post.title }}</div>
+      <div><strong>Описание: </strong>{{ post.body }}</div>
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.app {
+  padding: 20px;
 }
 
-nav {
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.post {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid teal;
+}
+
+.input {
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  border: 1px solid teal;
+  padding: 10px 15px;
+  margin-top: 15px;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.button {
+  align-self: flex-end;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: none;
+  color: teal;
+  border: 1px solid teal;
 }
 </style>
