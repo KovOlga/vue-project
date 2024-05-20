@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'PostList',
   props: {
     posts: {
       type: Array,
@@ -14,7 +15,7 @@ export default {
     <div><strong>Описание: </strong>{{ post.body }}</div>
   </div>
 </template>
-<style>
+<style scoped>
 .post {
   margin-top: 15px;
   padding: 15px;

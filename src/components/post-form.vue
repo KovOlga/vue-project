@@ -1,30 +1,30 @@
-<script setup>
-import { ref } from 'vue'
-const emit = defineEmits(['create'])
-const post = ref({
-  title: '',
-  body: ''
-})
-
-function createPost() {
-  post.value.id = Date.now()
-  emit('create', post)
-  // post.value = {
-  //   title: '',
-  //   body: ''
-  // }
+<script>
+export default {
+  data() {
+    return {
+      post: {
+        title: '',
+        body: ''
+      }
+    }
+  },
+  emits: ['create'],
+  methods: {
+    createPost() {
+      this.post.id = Date.now()
+      this.$emit('create', this.post)
+      this.post = {
+        title: '',
+        body: ''
+      }
+    }
+  }
 }
 </script>
 <template>
   <form class="form" @submit.prevent>
     <h4>Create a post</h4>
-    <input
-      v-model="post.title"
-      @input="post.title = $event.target.value"
-      class="input"
-      type="text"
-      placeholder="Title"
-    />
+    <input v-model="post.title" class="input" type="text" placeholder="Title" />
     <input
       v-bind:value="post.body"
       @input="post.body = $event.target.value"
@@ -35,7 +35,7 @@ function createPost() {
     <button class="button" @click="createPost">Create</button>
   </form>
 </template>
-<style>
+<style scoped>
 .form {
   display: flex;
   flex-direction: column;

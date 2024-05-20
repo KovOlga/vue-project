@@ -1,12 +1,11 @@
 <script lang="ts">
-import PostForm from './components/post-form.vue'
-import PostList from './components/post-list.vue'
+import PostForm from '@/components/post-form.vue'
+import PostList from '@/components/post-list.vue'
 export default {
   components: {
     PostList,
     PostForm
   },
-  emits: ['create'],
   data() {
     return {
       posts: [
@@ -35,7 +34,6 @@ export default {
   },
   methods: {
     createPost(post: any) {
-      console.log('post', post)
       this.posts.push(post)
     }
   }
