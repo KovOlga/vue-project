@@ -34,8 +34,9 @@ export default {
     }
   },
   methods: {
-    createPost(post) {
+    createPost(post: any) {
       console.log('post', post)
+      this.posts.push(post)
     }
   }
 }

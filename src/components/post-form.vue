@@ -9,8 +9,10 @@ const post = ref({
 function createPost() {
   post.value.id = Date.now()
   emit('create', post)
-  post.value.title = ''
-  post.value.body = ''
+  // post.value = {
+  //   title: '',
+  //   body: ''
+  // }
 }
 </script>
 <template>
